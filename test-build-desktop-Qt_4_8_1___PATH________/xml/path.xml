@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<pathpoint>
+  <pointinfo id="1"  >
+    <pointdirect preid="8" leftid="2"  rightid="3" />
+    <pointdirect preid="2" leftid="0"  rightid="8" />
+    <pointdirect preid="3" leftid="0"  rightid="8" />
+  </pointinfo>
+
+  <pointinfo id="2"  >
+    <pointdirect preid="7" leftid="3"  rightid="1" />
+    <pointdirect preid="1" leftid="0"  rightid="7" />
+    <pointdirect preid="3" leftid="0"  rightid="7" />
+  </pointinfo>
+
+  <pointinfo id="3"  >
+    <pointdirect preid="4" leftid="2"  rightid="1" />
+    <pointdirect preid="1" leftid="0"  rightid="4" />
+    <pointdirect preid="2" leftid="0"  rightid="4" />
+  </pointinfo>
+
+  <pointinfo id="4"  >
+    <pointdirect preid="3" leftid="9"  rightid="6" />
+    <pointdirect preid="6" leftid="0"  rightid="3" />
+    <pointdirect preid="9" leftid="0"  rightid="3" />
+  </pointinfo>
+
+  <pointinfo id="5"  >
+    <pointdirect preid="4" leftid="6"  rightid="8" />
+    <pointdirect preid="8" leftid="0"  rightid="4" />
+    <pointdirect preid="6" leftid="0"  rightid="4" />
+  </pointinfo>
+
+  <pointinfo id="6"  >
+    <pointdirect preid="7" leftid="5"  rightid="8" />
+    <pointdirect preid="8" leftid="0"  rightid="7" />
+    <pointdirect preid="5" leftid="0"  rightid="7" />
+  </pointinfo>
+
+  <pointinfo id="7"  >
+    <pointdirect preid="2" leftid="9"  rightid="6" />
+    <pointdirect preid="9" leftid="0"  rightid="2" />
+    <pointdirect preid="6" leftid="0"  rightid="2" />
+  </pointinfo>
+  <pointinfo id="8"  >
+    <pointdirect preid="1" leftid="5"  rightid="6" />
+    <pointdirect preid="5" leftid="0"  rightid="1" />
+    <pointdirect preid="6" leftid="0"  rightid="1" />
+  </pointinfo>
+  <pointinfo id="9"  >
+    <pointdirect preid="7" leftid="0"  rightid="4" />
+    <pointdirect preid="4" leftid="0"  rightid="7" />
+  </pointinfo>
+
+</pathpoint>

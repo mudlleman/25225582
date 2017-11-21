@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<work>
+  <pathpoint id="1" pointtype="end" >
+    <workstep id="1" condtiongroup="1,8" controlgroup="1,3" />
+  </pathpoint>
+  <pathpoint id="7" pointtype="end" >
+    <workstep id="1" condtiongroup="1,8" controlgroup="1,3" />
+  </pathpoint>
+  <pathpoint id="9" pointtype="end" >
+     <workstep id="1" condtiongroup="1,8" controlgroup="1,3" />
+  </pathpoint>
+  <pathpoint id="15" pointtype="end" >
+    <workstep id="1" condtiongroup="1,8" controlgroup="1,3" />
+  </pathpoint>
+</work>

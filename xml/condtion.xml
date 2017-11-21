@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<check>
+<condtiongroup id="8" relationshipadn="1" whilecheck="1">
+  <condtion id="1" type="gpio" CP="=" name="test" cpvalue="0" address="/sys/class/gpio/gpio68/value" />  
+</condtiongroup>
+
+<condtiongroup id="9" relationshipadn="1" whilecheck="0">
+  <condtion id="1" type="gpio" CP="=" name="test" cpvalue="1" address="25" />
+  <condtion id="2" type="gpio" CP="=" name="test" cpvalue="1" address="26" />
+</condtiongroup>
+
+</check>

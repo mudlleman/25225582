@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<pathpoint>
+  <pointinfo id="5" leftid="6" rightid="4" />
+  <pointinfo id="6" leftid="1" rightid="3" />
+  <pointinfo id="4" leftid="3" rightid="2" />
+  <pointinfo id="1" leftid="0" rightid="5" />
+  <pointinfo id="3" leftid="2" rightid="4" />
+  <pointinfo id="4" leftid="5" rightid="5" />
+  <pointinfo id="2" leftid="0" rightid="5" />
+
+</pathpoint>

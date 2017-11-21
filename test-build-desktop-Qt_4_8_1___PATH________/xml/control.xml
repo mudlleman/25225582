@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<action>
+  <controlgroup id="1" info="">
+    <control id="1" type="sleep"  name="test" setvalue="10000" address="" />
+  </controlgroup>
+</action>

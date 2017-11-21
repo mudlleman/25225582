@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<action>
+  <controlgroup id="1" info="">
+
+    <control id="3" type="sleep"  name="test" setvalue="10000" address="" />
+
+  </controlgroup>
+  <controlgroup id="2" info="">
+    <control id="1" type="gpio"  name="test" setvalue="" address=""  />
+    <control id="2" type="gpio"  name="test" setvalue="" address="" />
+    <control id="3" type="sleep"  name="test" setvalue="100" address="" />
+    <control id="4" type="speed"  name="test" setvalue="100" address="" />
+    <control id="5" type="Dirve1"  name="step" setvalue="100" address="" />
+  </controlgroup>
+</action>
