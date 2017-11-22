@@ -1,8 +1,7 @@
 #ifndef GETNAVIGATION_H
 #define GETNAVIGATION_H
 
-#include "owntimer.h"
-#include "xsserial.h"
+
 #include <QVector>
 #include "ludp.h"
 
@@ -23,11 +22,11 @@ class GetNavigation : public QObject
     Q_OBJECT
 public:
     explicit GetNavigation(QObject *parent = 0);
-     float GetNavigationValue(int mtype);
+     float GetNavigationValue();
      void SetCanTurn(bool direct);
+     void Transition(int b1,int b2);
 private:
-    OWNTimer m_threadTime;
-    xsserial *m_serial;
+
     int nvwidth;
     float nvalue1,nvalue2;
     QVector <int> nvallnumber;
@@ -45,15 +44,15 @@ private:
     bool m_directsmall;
 
 private :
-    void Transition(int b1,int b2);
+
     bool GetTwoPathDirect(QList<nvstrcut> curlist,QList<nvstrcut> oldlist,bool *directsmall);
     float GetNvflaotvalue(QList<nvstrcut> curlist,bool directsmall);
     float pointtofloat(int srart,int len);
 public:
 signals:
-    void NavigationChangeEvent(float nv);
+    //void NavigationChangeEvent(float nv);
 private slots:
-      void GetReadValue();
+
     
 };
 

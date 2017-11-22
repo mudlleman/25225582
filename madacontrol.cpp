@@ -52,8 +52,6 @@ void MadaControl::GetReadValue()
 
     if(readlen>0)
     {
-
-
         for(int i=0;i<readlen;i++)
         {
             m_tempcharv.append((unsigned char)m_serial->uart_buff[i]);
@@ -192,14 +190,8 @@ void MadaControl::MadaRunType(int type)
 
 void MadaControl::controlstep(int steplen)
 {
-    mutex.lock();
-    qDebug()<<steplen;
-    m_willrunstep=steplen;
-    isusenow=true;
-    temppostion=0;
-    setpostion=0;
-    nowtrun=true;
-    mutex.unlock();
+    //QByteArray qSation= ctbyte.GetSpeedByte(1,wrunspeed);
+  //  m_serial->serial_write(qSation.data(),qSation.length());
 
 }
 void MadaControl::wirtedata(QByteArray qb)

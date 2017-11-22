@@ -30,7 +30,8 @@ SOURCES += main.cpp\
     speedpulse.cpp \
     ludp.cpp \
     netcommand.cpp \
-    drivestauts.cpp
+    drivestauts.cpp \
+    navmanger.cpp
 
 HEADERS  += mainwindow.h \
     xsserial.h \
@@ -49,6 +50,7 @@ HEADERS  += mainwindow.h \
     speedpulse.h \
     ludp.h \
     netcommand.h \
-    drivestauts.h
+    drivestauts.h \
+    navmanger.h
 
 FORMS    += mainwindow.ui

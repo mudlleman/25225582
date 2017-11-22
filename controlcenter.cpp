@@ -4,8 +4,13 @@ ControlCenter::ControlCenter(QObject *parent) :
     QThread(parent)
 { 
 
+
+
+
     CanNetControl=false;
     m_bgetsetplong=false;
+    DirveSystemNumber=1;
+    m_getnv=new NavManger(DirveSystemNumber);
     netidsteplen=0;
     CompareValue=300;
     originalID=100;
@@ -21,7 +26,6 @@ ControlCenter::ControlCenter(QObject *parent) :
     m_bstop=false;
     NetControlGpioNumber=0;
 
-    m_nv=0;
 
     m_madacontrol1=new MadaControl("/dev/ttySP2");
     m_madacontrol2=new MadaControl("/dev/ttySP3");
@@ -49,18 +53,14 @@ void  ControlCenter::GetReadValue()
 {
 
     runnumber++;
-    m_nv=m_getnv.GetNavigationValue(1);
+
     StopType stype=gorun;
-    if(m_nv<-1000)
-    {
-        stype=NowStop;
-    }
+
     //检测时候打开
   //  StopType stype=GetSate();
 
     if(CanNetControl)
     {
-        m_nv=NetSpeedbl;
         tempspeed=m_netspeed;
         stype=gorun;
         netcontorlnubmer++;
@@ -87,16 +87,10 @@ void  ControlCenter::GetReadValue()
         }
     }
 
-    long lv=m_madacontrol1->getpostion();
-
-    float nv=m_nv;
-
-    float outv=m_pid.GetPidFloat(kp,ki,kd,nv);
-
     if(stype==NowStop)
     {
         tempspeed=0;
-        outv=0;
+
     }
     if(stype==FreeStop)
     {
@@ -110,10 +104,7 @@ void  ControlCenter::GetReadValue()
         }
     }
 
-
-    tempspeed=LowSpeed()*tempspeed;
-
-    SetMdSpeed(outv,tempspeed);
+    SetMdSpeed(tempspeed,1);
 
     if(CanNetControl)
     {
@@ -219,7 +210,7 @@ void ControlCenter::SetNavType(int pathid)
         PointRuntype pr=m_qlistpasspath[i];
         if(pr.pathid==pathid)
         {
-            m_getnv.SetCanTurn(pr.isright);
+            m_getnv->SetCanTurn(pr.isright);
             netidsteplen=pr.steplen;
             willarriveid =pr.topathid;
             break;
@@ -228,34 +219,54 @@ void ControlCenter::SetNavType(int pathid)
 
 }
 
-void ControlCenter::SetMdSpeed(float bl,float speed)
+float ControlCenter::GetCalMdSpeed(bool direct, float speed, float bl)
 {
-   /*  float tempbl=qAbs(bl);
-   if((speed+speed*tempbl)>3000)
+    float calspeed=speed;
+    //判断是否是内侧马达
+    if(direct)
     {
-        speed=3000/(1+tempbl);
-    }
-*/
-
-    float speed1=speed;
-    float speed2=speed;
-    if(bl>0)
-    {
-        speed1=speed-speed*bl*2;
-
+        if(bl>0)
+        {
+            calspeed=speed-speed*bl*2;
+        }
     }
     else
     {
-        speed2=speed+speed*bl*2;
-
+        if(bl<0)
+        {
+            calspeed=speed+speed*bl*2;
+            calspeed=0-calspeed;
+        }
     }
+}
+
+void ControlCenter::SetMdSpeed(float speed)
+{
+
+    QByteArray Qtarry[4];
+    float  m_nv=m_getnv->GetNavigationValue(0);
+    float bl=m_pid.GetPidFloat(kp,ki,kd,m_nv);
+
+    float speed1=GetCalMdSpeed(true,speed,bl);
+    float speed2=GetCalMdSpeed(false,speed,bl);
+
+     Qtarry[1]= controlbyte.GetSpeedByte(1,speed1);
+
+      Qtarry[2]= controlbyte.GetSpeedByte(1,speed2);
 
 
-    speed2=0-speed2;
+    if(DirveSystemNumber==2)
+    {
+         m_nv=m_getnv->GetNavigationValue(1);
+         bl=m_pid.GetPidFloat(kp,ki,kd,m_nv);
 
-    QByteArray qtsend1= controlbyte.GetSpeedByte(1,speed1);
+         speed1=GetCalMdSpeed(true,speed,bl);
+         speed2=GetCalMdSpeed(false,speed,bl);
 
-    QByteArray qtsend2= controlbyte.GetSpeedByte(1,speed2);
+         Qtarry[3]= controlbyte.GetSpeedByte(1,speed1);
+
+         Qtarry[4]= controlbyte.GetSpeedByte(1,speed2);
+    }
 
     m_madacontrol1->wirtedata(qtsend1);
 
@@ -350,11 +361,7 @@ StopType ControlCenter::GetSate()
 {
     StopType stopType=gorun;
     bool br=true;
-    if(m_nv<-500)
-    {
-        br= false;
-        stopType=NowStop;
-    }
+
     if(!m_gpio.GetCheckGpio())
     {
         stopType=NowStop;
@@ -376,7 +383,7 @@ StopType ControlCenter::GetSate()
 
 void ControlCenter::SendCurInfobyUdp()
 {
-    int nvnv=m_nv;
+    int nvnv=-1000;
     QString nvstr=QString::number(nvnv,10);
    // m_batv=m_gpio.GetAdc();
     QString steplong=QString::number(m_madacontrol1->getpostion(),10);
@@ -465,7 +472,7 @@ void ControlCenter::ludpvalue(QString qstr)
             {
                 setdirect=true;
             }
-            m_getnv.SetCanTurn(setdirect);
+            m_getnv->SetCanTurn(setdirect);
             arriveid=qsl.at(2).toInt();
             m_runlist.clear();
             m_setspeed=1000;
@@ -551,7 +558,7 @@ void ControlCenter::revData()
         {
             setdirect=true;
         }
-        m_getnv.SetCanTurn(setdirect);
+        m_getnv->SetCanTurn(setdirect);
         arriveid=qsl.at(2).toInt();
         m_runlist.clear();
         m_setspeed=1000;

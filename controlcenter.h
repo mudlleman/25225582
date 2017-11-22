@@ -6,7 +6,7 @@
 
 #include<QtNetwork/QTcpSocket>
 
-#include "getnavigation.h"
+#include"navmanger.h"
 #include "pidcalculate.h"
 #include "xsserial.h"
 #include "ccontrolbyte.h"
@@ -62,8 +62,10 @@ private:
     int NetControlGpioNumber;
 
     int CompareValue;
-    //导航值
-    int m_nv;
+
+    //驱动单元数量
+    int DirveSystemNumber;
+
 
     //SpeedPulse m_speedpulse  ;
 
@@ -73,7 +75,7 @@ private:
     QList<int> m_runlist;
 
     QVector<int> m_listpassid;
-    GetNavigation m_getnv;
+    NavManger *m_getnv;
     OWNTimer m_threadTime;
     PidCalculate m_pid;
     float m_setspeed;
@@ -100,7 +102,9 @@ private:
     //获取当前的运行状态
     StopType GetSate();
 
-    void SetMdSpeed(float bl,float speed);
+    float GetCalMdSpeed(bool direct,float speed,float bl);
+    // 设置马达速度
+    void SetMdSpeed(float speed);
     //就算路径
     void CalPath();
     //到达后执行
