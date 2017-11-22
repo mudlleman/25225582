@@ -8,6 +8,7 @@ class DriveStauts : public QObject
     Q_OBJECT
 public:
     explicit DriveStauts(QObject *parent = 0);
+    void PassByte(QByteArray qba);
 public:
     int speed;
     int refspeed;

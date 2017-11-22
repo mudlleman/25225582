@@ -65,7 +65,7 @@ private:
     //导航值
     int m_nv;
 
-    //SpeedPulse m_speedpulse;
+    //SpeedPulse m_speedpulse  ;
 
     ReadPath m_readpath;
 

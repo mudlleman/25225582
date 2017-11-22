@@ -3,4 +3,5 @@
 DriveStauts::DriveStauts(QObject *parent) :
     QObject(parent)
 {
+
 }

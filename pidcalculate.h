@@ -17,7 +17,8 @@ private:
     float err_inte;
     float err_diff;
     float err_record;
-    //float sample;
+
+    //float sample;ssss
 
     
 signals:
