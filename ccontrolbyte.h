@@ -11,6 +11,7 @@ public:
     
     QByteArray GetSpeedByte(int madindex,int speed);
     QByteArray GetPostionByte(int madindex,int speed);
+    QByteArray GetStateOPen(int madindex,bool start);
 signals:
     
 public slots:

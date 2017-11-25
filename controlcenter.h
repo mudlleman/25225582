@@ -17,6 +17,7 @@
 #include "readpath.h"
 #include"speedpulse.h"
 #include "ludp.h"
+#include "gpiopmw.h"
 
 enum StopType{NowStop,FreeStop,gorun};
 //enum  Direectenum { front, back, left,right};
@@ -71,6 +72,8 @@ private:
 
     ReadPath m_readpath;
 
+    GpioPmw gpiopmw;
+
     QList<PointRuntype> m_qlistpasspath;
     QList<int> m_runlist;
 
@@ -87,6 +90,8 @@ private:
 
     MadaControl *m_madacontrol1;
     MadaControl *m_madacontrol2;
+
+
     Gpio m_gpio;
     work m_work;
     condition m_condition;

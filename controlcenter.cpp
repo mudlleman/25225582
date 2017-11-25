@@ -3,10 +3,6 @@
 ControlCenter::ControlCenter(QObject *parent) :
     QThread(parent)
 { 
-
-
-
-
     CanNetControl=false;
     m_bgetsetplong=false;
     DirveSystemNumber=1;
@@ -25,6 +21,10 @@ ControlCenter::ControlCenter(QObject *parent) :
     arriveid=7;
     m_bstop=false;
     NetControlGpioNumber=0;
+
+    gpiopmw.startrun("/sys/class/gpio/gpio70/value");
+
+
 
 
     m_madacontrol1=new MadaControl("/dev/ttySP2");
@@ -104,7 +104,7 @@ void  ControlCenter::GetReadValue()
         }
     }
 
-    SetMdSpeed(tempspeed,1);
+    SetMdSpeed(tempspeed);
 
     if(CanNetControl)
     {
@@ -131,7 +131,7 @@ void ControlCenter::ExcueAfterArrive()
         {
             qDebug()<<"arrive!";
             m_threadTime.mmsleep(30);
-            SetMdSpeed(0,0);
+            SetMdSpeed(0);
             excutemp=arriveid;
             QString keys=QString::number(arriveid, 10)+"end";
             m_work.executework(keys);
@@ -268,9 +268,9 @@ void ControlCenter::SetMdSpeed(float speed)
          Qtarry[4]= controlbyte.GetSpeedByte(1,speed2);
     }
 
-    m_madacontrol1->wirtedata(qtsend1);
+    //m_madacontrol1->wirtedata(qtsend1);
 
-    m_madacontrol2->wirtedata(qtsend2);
+    //m_madacontrol2->wirtedata(qtsend2);
 
 
 }
@@ -576,6 +576,11 @@ void ControlCenter::revData()
         qDebug()<<qsl;
         qDebug()<<"pid"<<kp<<ki<<kd;
 
+    }
+    if(qsl.at(0)=="pwm"&&qsl.length()==2)
+    {
+        int pmw=qsl.at(1).toInt();
+        gpiopmw.SetIntal(pmw);
     }
 
     if(qsl.at(0)=="speed"&&qsl.length()==2)

@@ -13,7 +13,6 @@ MadaControl::MadaControl(QString comname,QObject *parent) :
     m_postion=0;
     m_bjpostion=0;
     m_willrunstep=0;
-
     m_turnspeed=130;
 
     temppostion=0;

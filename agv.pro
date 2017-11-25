@@ -31,7 +31,8 @@ SOURCES += main.cpp\
     ludp.cpp \
     netcommand.cpp \
     drivestauts.cpp \
-    navmanger.cpp
+    navmanger.cpp \
+    gpiopmw.cpp
 
 HEADERS  += mainwindow.h \
     xsserial.h \
@@ -51,6 +52,7 @@ HEADERS  += mainwindow.h \
     ludp.h \
     netcommand.h \
     drivestauts.h \
-    navmanger.h
+    navmanger.h \
+    gpiopmw.h
 
 FORMS    += mainwindow.ui
